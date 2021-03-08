@@ -4,6 +4,7 @@ const routes = require("./routes")
 
 const server = express()
 
+server.use(express.urlencoded({ extended: true })) //Config. express pro req.body funcionar
 server.use(express.static("public")) // express vai ficar observando a pasta public pra servir os arquivos estáticos
 server.use(routes)
 

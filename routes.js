@@ -9,8 +9,25 @@ routes.get("/instructors", (req, res) => {
   return res.render("instructors/index")
 })
 
+routes.get("/instructors/create", (req, res) => {
+  return res.render("instructors/create")
+})
+
 routes.get("/members", (req, res) => {
-  return res.send("members")
+  return res.send("Members")
+})
+
+routes.post("/instructors", (req, res) => {
+  const keys = Object.keys(req.body)
+
+  for (key of keys) {
+    console.log(key)
+    if (req.body[key] == "") {
+      return res.send("Please, fill all fields")
+    }
+  }
+
+  return res.send(req.body)
 })
 
 module.exports = routes
