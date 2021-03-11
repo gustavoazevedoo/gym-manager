@@ -1,6 +1,6 @@
 const data = require("./data.json")
 const fs = require("fs")
-const { age } = require("./utils")
+const { age, date } = require("./utils")
 
 exports.show = (req, res) => {
   const { id } = req.params
@@ -64,7 +64,7 @@ exports.edit = (req, res) => {
 
   const instructor = {
     ...foundInstructor,
-    birth: "1212-12-12"
+    birth: date(foundInstructor.birth)
   }
 
   return res.render("instructors/edit", { instructor })
