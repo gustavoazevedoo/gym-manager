@@ -18,10 +18,12 @@ routes.get("/instructors/:id", instructors.show)
 
 routes.get("/instructors/:id/edit", instructors.edit)
 
+routes.post("/instructors", instructors.post)
+
+routes.put("/instructors", instructors.put)
+
 routes.get("/members", (req, res) => {
   return res.send("Members")
 })
-
-routes.post("/instructors", instructors.post)
 
 module.exports = routes
