@@ -1,4 +1,17 @@
 {
+  "members": [
+    {
+      "avatar_url": "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
+      "name": "Rubinho",
+      "email": "rubinho@gym-manager.com",
+      "birth": 242524800000,
+      "gender": "M",
+      "blood": "A+",
+      "weight": "85",
+      "height": "182",
+      "id": 6
+    }
+  ],
   "instructors": [
     {
       "id": 1,
@@ -6,7 +19,10 @@
       "name": "christian buehner",
       "birth": 363312000000,
       "gender": "M",
-      "services": "music, video",
+      "services": [
+        "music",
+        " video"
+      ],
       "created_at": 1615670753593
     },
     {
@@ -15,7 +31,10 @@
       "name": "Logan Weaver",
       "birth": 543283200000,
       "gender": "M",
-      "services": "Crossfit, funcional",
+      "services": [
+        "Crossfit",
+        " funcional"
+      ],
       "created_at": 1615671021553
     },
     {
@@ -24,7 +43,9 @@
       "name": "Nicole Davis",
       "birth": 778723200000,
       "gender": "F",
-      "services": "Natação",
+      "services": [
+        "Natação"
+      ],
       "created_at": 1615671205721
     }
   ]
