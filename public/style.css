@@ -245,6 +245,8 @@ tbody tr td:last-child a,
 }
 
 .table-container thead th:last-child,
-.table-container tbody tr td:last-child {
+.table-container tbody tr td:last-child,
+.table-container thead th:nth-child(3),
+.table-container tbody tr td:nth-child(3) {
   text-align: center;
 }
