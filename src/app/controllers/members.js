@@ -1,11 +1,31 @@
 const Member = require("../models/Member")
-const { age, date } = require("../../lib/utils")
+const { date } = require("../../lib/utils")
 
 module.exports = {
   index(req, res) {
-    Member.all((members) => {
-      return res.render("members/index", { members })
-    })
+    let { filter, page, limit } = req.query
+
+    page = page || 1
+    limit = 2
+    let offset = limit * (page - 1) // A partir de qual posição do array ele mostra
+
+    const params = {
+      filter,
+      page,
+      limit,
+      offset,
+      callback(members) {
+        // Para agrupar os dados que eu vou enviar
+        const pagination = {
+          page,
+          total: Math.ceil(members[0].total / limit) // total (de paginação) é a quantidade total de instrutores dividido por quantos instrutores aparecem por pagina. Arredondado pra cima, para no caso de 3 instrutores, mostrando dois por pagina, tem que ter duas paginas
+        }
+
+        return res.render("members/index", { members, filter, pagination })
+      }
+    }
+
+    Member.paginate(params)
   },
   create(req,res) {
     Member.instructorsSelectOptions((options) => {

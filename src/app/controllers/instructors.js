@@ -3,26 +3,33 @@ const { age, date } = require("../../lib/utils")
 
 module.exports = {
   index(req, res) {
-    const { filter } = req.query
+    let { filter, page, limit } = req.query
 
-    if (filter) {
-      Instructor.findBy(filter, (instructors) => {
+    page = page || 1
+    limit = 2
+    let offset = limit * (page - 1) // A partir de qual posição do array ele mostra
+
+    const params = {
+      filter,
+      page,
+      limit,
+      offset,
+      callback(instructors) {
+        // Para agrupar os dados que eu vou enviar
+        const pagination = {
+          page,
+          total: Math.ceil(instructors[0].total / limit) // total (de paginação) é a quantidade total de instrutores dividido por quantos instrutores aparecem por pagina. Arredondado pra cima, para no caso de 3 instrutores, mostrando dois por pagina, tem que ter duas paginas
+        }
+        
         for (instructor of instructors) {
           instructor.services = instructor.services.split(",")
         }
 
-        return res.render("instructors/index", { instructors, filter })
-      })
-
-    } else {
-      Instructor.all((instructors) => {
-        for (instructor of instructors) {
-          instructor.services = instructor.services.split(",")
-        }
-  
-        return res.render("instructors/index", { instructors })
-      })
+        return res.render("instructors/index", { instructors, filter, pagination })
+      }
     }
+
+    Instructor.paginate(params)
   },
   create(req,res) {
     return res.render("instructors/create")
